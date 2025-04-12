@@ -1,0 +1,30 @@
+config defaults
+	option syn_flood '1'
+	option input 'ACCEPT'
+	option output 'ACCEPT'
+	option forward 'ACCEPT'
+
+config zone
+	option name 'lan'
+	option network 'lan'
+	option input 'ACCEPT'
+	option output 'ACCEPT'
+	option forward 'ACCEPT'
+
+config zone
+	option name 'userlan'
+	option network 'userlan'
+	option input 'ACCEPT'
+	option output 'ACCEPT'
+	option forward 'ACCEPT'
+
+config forwarding
+	option src 'userlan'
+	option dest 'wan'
+
+config rule
+	option name 'Block-UserLAN-to-Admin'
+	option src 'userlan'
+	option dest_ip '192.168.6.1'
+	option target 'REJECT'
+	option proto 'all'
